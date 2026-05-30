@@ -60,7 +60,9 @@ Just describe your product → **VietHay** automatically generates a compelling 
 
 ## 📸 Screenshots & Demo
 
-*(Add screenshots and a short demo GIF/video here after building)*
+Run locally: `cd web && npm install && npm run dev` → open http://localhost:3000
+
+Deploy on Vercel with root directory set to `web`.
 
 ---
 
