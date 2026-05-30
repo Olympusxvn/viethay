@@ -30,6 +30,23 @@ export async function hasServerKey(): Promise<boolean> {
   }
 }
 
+export async function testPixverseKey(
+  apiKey: string | undefined
+): Promise<{ valid: boolean; credits?: number; error?: string }> {
+  try {
+    const res = await fetch("/api/pixverse/test", {
+      headers: { ...keyHeader(apiKey) },
+    });
+    return (await res.json()) as {
+      valid: boolean;
+      credits?: number;
+      error?: string;
+    };
+  } catch (err) {
+    return { valid: false, error: err instanceof Error ? err.message : "Request failed" };
+  }
+}
+
 export async function startPixverseGeneration(
   apiKey: string | undefined,
   params: PixverseParams

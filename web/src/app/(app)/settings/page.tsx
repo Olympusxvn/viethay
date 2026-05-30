@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, Check } from "lucide-react";
+import { Eye, EyeOff, Check, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useClientReady } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
 import { LanguageToggle } from "@/components/i18n/language-toggle";
 import { getSettings, saveSettings } from "@/lib/storage";
+import { testPixverseKey } from "@/lib/pixverse-client";
 
 function maskKey(key: string): string {
   if (!key) return "";
@@ -24,6 +25,10 @@ function SettingsForm() {
   const [show, setShow] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState(false);
+  const [testing, setTesting] = useState(false);
+  const [testResult, setTestResult] = useState<
+    { valid: boolean; credits?: number; error?: string } | null
+  >(null);
 
   function handleSave() {
     const key = apiKey.trim();
@@ -43,6 +48,16 @@ function SettingsForm() {
     saveSettings({ pixverseApiKey: "", vnTone });
     setApiKey("");
     setSavedKey("");
+    setTestResult(null);
+  }
+
+  async function handleTest() {
+    setTesting(true);
+    setTestResult(null);
+    const key = apiKey.trim();
+    const result = await testPixverseKey(key || undefined);
+    setTestResult(result);
+    setTesting(false);
   }
 
   return (
@@ -107,12 +122,33 @@ function SettingsForm() {
             >
               {saved ? t("settings.saved") : t("settings.save")}
             </Button>
+            <Button variant="outline" onClick={handleTest} disabled={testing}>
+              {testing && <Loader2 className="size-3.5 animate-spin" />}
+              {t("settings.test")}
+            </Button>
             {savedKey && (
               <Button variant="ghost" onClick={handleClear}>
                 {t("settings.clear")}
               </Button>
             )}
           </div>
+
+          {testResult && (
+            testResult.valid ? (
+              <p className="flex items-center gap-1.5 text-xs text-emerald-400">
+                <Check className="size-3.5" />
+                {t("settings.testOk")}
+                {typeof testResult.credits === "number" &&
+                  ` — ${testResult.credits.toLocaleString()} credits`}
+              </p>
+            ) : (
+              <p className="flex items-center gap-1.5 text-xs text-red-400">
+                <XCircle className="size-3.5" />
+                {t("settings.testFail")}
+                {testResult.error ? `: ${testResult.error}` : ""}
+              </p>
+            )
+          )}
 
           {error && (
             <p className="text-xs text-red-400">{t("settings.saveError")}</p>

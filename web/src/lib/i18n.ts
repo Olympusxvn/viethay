@@ -104,6 +104,9 @@ export const translations = {
     "settings.savedKey": "Key đang lưu",
     "settings.noKey": "Chưa lưu key — sẽ dùng key server (nếu có) hoặc chế độ demo.",
     "settings.clear": "Xoá key",
+    "settings.test": "Kiểm tra key",
+    "settings.testOk": "Key hợp lệ — PixVerse đã nhận",
+    "settings.testFail": "Key không hợp lệ",
     "settings.saveError": "Không lưu được (trình duyệt chặn localStorage?).",
     "settings.note":
       "Không có key → chế độ demo với video mẫu. Có key → gọi PixVerse API thật để tạo video quảng cáo sản phẩm (8s, 9:16).",
@@ -218,6 +221,9 @@ export const translations = {
     "settings.savedKey": "Saved key",
     "settings.noKey": "No key saved — will use the server key (if any) or demo mode.",
     "settings.clear": "Clear key",
+    "settings.test": "Test key",
+    "settings.testOk": "Key is valid — accepted by PixVerse",
+    "settings.testFail": "Invalid key",
     "settings.saveError": "Couldn't save (browser blocking localStorage?).",
     "settings.note":
       "No key → demo mode with a sample video. With a key → calls the real PixVerse API to generate a product ad video (8s, 9:16).",
