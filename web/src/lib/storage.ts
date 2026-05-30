@@ -17,8 +17,13 @@ export function getSettings(): { pixverseApiKey: string; vnTone: boolean } {
 export function saveSettings(settings: {
   pixverseApiKey: string;
   vnTone: boolean;
-}): void {
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+}): boolean {
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function hasApiKeyPrompted(): boolean {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Eye, EyeOff, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,17 +10,40 @@ import { useTranslation } from "@/hooks/use-translation";
 import { LanguageToggle } from "@/components/i18n/language-toggle";
 import { getSettings, saveSettings } from "@/lib/storage";
 
+function maskKey(key: string): string {
+  if (!key) return "";
+  if (key.length <= 8) return "••••";
+  return `${key.slice(0, 4)}••••${key.slice(-4)}`;
+}
+
 function SettingsForm() {
   const { t } = useTranslation();
   const s = getSettings();
   const [apiKey, setApiKey] = useState(s.pixverseApiKey);
   const [vnTone, setVnTone] = useState(s.vnTone);
+  const [savedKey, setSavedKey] = useState(s.pixverseApiKey);
+  const [show, setShow] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState(false);
 
   function handleSave() {
-    saveSettings({ pixverseApiKey: apiKey.trim(), vnTone });
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    const key = apiKey.trim();
+    const ok = saveSettings({ pixverseApiKey: key, vnTone });
+    if (ok) {
+      setApiKey(key);
+      setSavedKey(key);
+      setSaved(true);
+      setError(false);
+      setTimeout(() => setSaved(false), 2500);
+    } else {
+      setError(true);
+    }
+  }
+
+  function handleClear() {
+    saveSettings({ pixverseApiKey: "", vnTone });
+    setApiKey("");
+    setSavedKey("");
   }
 
   return (
@@ -37,14 +61,34 @@ function SettingsForm() {
         <CardHeader>
           <CardTitle className="text-base">{t("settings.apiKey")}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <Input
-            type="password"
-            placeholder={t("settings.apiKeyPh")}
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            className="border-white/10 bg-white/[0.06]"
-          />
+        <CardContent className="space-y-3">
+          <div className="relative">
+            <Input
+              type={show ? "text" : "password"}
+              placeholder={t("settings.apiKeyPh")}
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              className="border-white/10 bg-white/[0.06] pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShow((v) => !v)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#e9eaf2]/50 hover:text-[#e9eaf2]"
+              aria-label={show ? "Hide" : "Show"}
+            >
+              {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+            </button>
+          </div>
+
+          {savedKey ? (
+            <p className="flex items-center gap-1.5 text-xs text-emerald-400">
+              <Check className="size-3.5" />
+              {t("settings.savedKey")}: <span className="font-mono">{maskKey(savedKey)}</span>
+            </p>
+          ) : (
+            <p className="text-xs text-[#e9eaf2]/45">{t("settings.noKey")}</p>
+          )}
+
           <label className="flex items-center gap-2 text-sm text-[#e9eaf2]/80">
             <input
               type="checkbox"
@@ -54,12 +98,24 @@ function SettingsForm() {
             />
             {t("settings.vnTone")}
           </label>
-          <Button
-            onClick={handleSave}
-            className="bg-gradient-to-r from-[#ff4d4d] to-[#ff8a3d] text-white"
-          >
-            {saved ? t("settings.saved") : t("settings.save")}
-          </Button>
+
+          <div className="flex flex-wrap gap-2">
+            <Button
+              onClick={handleSave}
+              className="bg-gradient-to-r from-[#ff4d4d] to-[#ff8a3d] text-white"
+            >
+              {saved ? t("settings.saved") : t("settings.save")}
+            </Button>
+            {savedKey && (
+              <Button variant="ghost" onClick={handleClear}>
+                {t("settings.clear")}
+              </Button>
+            )}
+          </div>
+
+          {error && (
+            <p className="text-xs text-red-400">{t("settings.saveError")}</p>
+          )}
           <p className="text-xs text-[#e9eaf2]/50">{t("settings.note")}</p>
         </CardContent>
       </Card>

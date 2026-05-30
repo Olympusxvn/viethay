@@ -101,6 +101,10 @@ export const translations = {
     "settings.vnTone": "Chất văn hóa Việt (VN Tone)",
     "settings.save": "Lưu cài đặt",
     "settings.saved": "Đã lưu ✓",
+    "settings.savedKey": "Key đang lưu",
+    "settings.noKey": "Chưa lưu key — sẽ dùng key server (nếu có) hoặc chế độ demo.",
+    "settings.clear": "Xoá key",
+    "settings.saveError": "Không lưu được (trình duyệt chặn localStorage?).",
     "settings.note":
       "Không có key → chế độ demo với video mẫu. Có key → gọi PixVerse API thật để tạo video quảng cáo sản phẩm (8s, 9:16).",
     "settings.language": "Ngôn ngữ",
@@ -211,6 +215,10 @@ export const translations = {
     "settings.vnTone": "Vietnamese cultural tone (VN Tone)",
     "settings.save": "Save settings",
     "settings.saved": "Saved ✓",
+    "settings.savedKey": "Saved key",
+    "settings.noKey": "No key saved — will use the server key (if any) or demo mode.",
+    "settings.clear": "Clear key",
+    "settings.saveError": "Couldn't save (browser blocking localStorage?).",
     "settings.note":
       "No key → demo mode with a sample video. With a key → calls the real PixVerse API to generate a product ad video (8s, 9:16).",
     "settings.language": "Language",
