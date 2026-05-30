@@ -1,0 +1,337 @@
+<div style="max-width:1200px;margin:0 auto">
+  <h2>VietHay — TRAE-inspired UI Mockup</h2>
+  <p class="subtitle">Logo concept + app shell (sidebar) + Generation page + Video result page</p>
+
+  <div class="section">
+    <div class="label">Logo</div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+      <div class="card" data-choice="logo-warm" onclick="toggleSelect(this)">
+        <div class="card-image" style="background:linear-gradient(135deg,#0b0d12 0%,#121828 45%,#1a1630 100%);padding:22px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#ff4d4d 0%,#ff8a3d 45%,#ffd15c 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(255,77,77,.22)">
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7 7L17 27L27 7" stroke="rgba(11,13,18,.92)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13 9.5C12 6.5 8.5 5 6.5 7" stroke="rgba(11,13,18,.92)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M21 9.5C22 6.5 25.5 5 27.5 7" stroke="rgba(11,13,18,.92)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="5.6" cy="7.8" r="1.7" fill="rgba(11,13,18,.92)"/>
+                <circle cx="28.4" cy="7.8" r="1.7" fill="rgba(11,13,18,.92)"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:20px;letter-spacing:.2px;color:#f5f5f7">VietHay</div>
+              <div style="font-size:12px;color:rgba(245,245,247,.68)">Warm, premium, Vietnamese-market friendly</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Warm Gradient</h3>
+          <p>Coral → orange → gold. Friendly energy, strong “sell” vibes.</p>
+        </div>
+      </div>
+
+      <div class="card" data-choice="logo-electric" onclick="toggleSelect(this)">
+        <div class="card-image" style="background:linear-gradient(135deg,#070915 0%,#0b1024 45%,#12133b 100%);padding:22px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#7c3aed 0%,#06b6d4 52%,#22c55e 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(6,182,212,.18)">
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7 7L17 27L27 7" stroke="rgba(7,9,21,.94)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13 9.5C12 6.5 8.5 5 6.5 7" stroke="rgba(7,9,21,.94)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M21 9.5C22 6.5 25.5 5 27.5 7" stroke="rgba(7,9,21,.94)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="5.6" cy="7.8" r="1.7" fill="rgba(7,9,21,.94)"/>
+                <circle cx="28.4" cy="7.8" r="1.7" fill="rgba(7,9,21,.94)"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:20px;letter-spacing:.2px;color:#f5f5f7">VietHay</div>
+              <div style="font-size:12px;color:rgba(245,245,247,.68)">TRAE-like neon tech, modern & fast</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Electric Neon</h3>
+          <p>Purple → cyan → green. More “AI lab”, high-tech premium.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="label">App Shell</div>
+    <div class="mockup">
+      <div class="mockup-header">Sidebar + Main layout (desktop)</div>
+      <div class="mockup-body">
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.35), transparent 55%),radial-gradient(900px 520px at 90% 0%, rgba(6,182,212,.28), transparent 60%),linear-gradient(180deg,#0a0b14 0%,#0c1020 100%);color:#e9eaf2">
+          <div style="display:flex;gap:0;min-height:410px">
+            <div style="width:260px;padding:18px 14px;border-right:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));backdrop-filter:blur(10px)">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 10px 14px 10px">
+                <div style="width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#ff4d4d 0%,#ff8a3d 45%,#ffd15c 100%);display:flex;align-items:center;justify-content:center">
+                  <svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7 7L17 27L27 7" stroke="rgba(11,13,18,.92)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13 9.5C12 6.5 8.5 5 6.5 7" stroke="rgba(11,13,18,.92)" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M21 9.5C22 6.5 25.5 5 27.5 7" stroke="rgba(11,13,18,.92)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="5.6" cy="7.8" r="1.7" fill="rgba(11,13,18,.92)"/>
+                    <circle cx="28.4" cy="7.8" r="1.7" fill="rgba(11,13,18,.92)"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:750;letter-spacing:.2px">VietHay</div>
+                  <div style="font-size:12px;color:rgba(233,234,242,.62)">AI Video Marketing</div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:6px;padding:6px">
+                <div style="padding:10px 12px;border-radius:12px;background:linear-gradient(135deg,rgba(124,58,237,.32),rgba(6,182,212,.18));border:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center">
+                  <span>Generate</span>
+                  <span style="font-size:12px;color:rgba(233,234,242,.65)">⌘G</span>
+                </div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Video Results</div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">History</div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Templates</div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Settings</div>
+              </div>
+
+              <div style="margin-top:16px;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10)">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:34px;height:34px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05));display:flex;align-items:center;justify-content:center">QC</div>
+                  <div style="flex:1">
+                    <div style="font-size:13px;font-weight:650">Quoc Cuong</div>
+                    <div style="font-size:12px;color:rgba(233,234,242,.6)">Hackathon mode</div>
+                  </div>
+                  <div style="opacity:.7">⋯</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:1;padding:18px 18px 22px 18px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div>
+                  <div style="font-size:18px;font-weight:760">Generate a Product Video</div>
+                  <div style="font-size:12px;color:rgba(233,234,242,.62)">Upload images → describe product → pick style → generate</div>
+                </div>
+                <div style="display:flex;gap:10px">
+                  <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px;color:rgba(233,234,242,.75)">Credits: 12</div>
+                  <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px;color:rgba(233,234,242,.75)">VN Tone: On</div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:14px">
+                <div style="border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:14px">
+                  <div style="font-size:12px;color:rgba(233,234,242,.65);margin-bottom:10px">Product assets</div>
+                  <div style="border-radius:16px;background:rgba(0,0,0,.22);border:1px dashed rgba(255,255,255,.18);padding:16px;display:flex;gap:12px;align-items:center">
+                    <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(124,58,237,.28),rgba(6,182,212,.16));border:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center">⬆</div>
+                    <div style="flex:1">
+                      <div style="font-weight:650">Drop images to upload</div>
+                      <div style="font-size:12px;color:rgba(233,234,242,.62)">JPG/PNG up to 10MB • 1–6 images recommended</div>
+                    </div>
+                    <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12px">Browse</div>
+                  </div>
+
+                  <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div style="border-radius:14px;background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.10);padding:10px">
+                      <div style="font-size:11px;color:rgba(233,234,242,.6);margin-bottom:6px">Product name</div>
+                      <div style="border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px 10px;color:rgba(233,234,242,.85)">“Nước hoa mini 10ml”</div>
+                    </div>
+                    <div style="border-radius:14px;background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.10);padding:10px">
+                      <div style="font-size:11px;color:rgba(233,234,242,.6);margin-bottom:6px">Goal</div>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <div style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Shopee</div>
+                        <div style="padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,rgba(255,77,77,.22),rgba(255,138,61,.12));border:1px solid rgba(255,255,255,.12);font-size:12px">TikTok</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:12px;border-radius:14px;background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.10);padding:10px">
+                    <div style="font-size:11px;color:rgba(233,234,242,.6);margin-bottom:6px">Description</div>
+                    <div style="border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px 10px;color:rgba(233,234,242,.82);min-height:56px">
+                      Mùi nhẹ, sang, giữ hương 6–8h • phù hợp đi làm/đi chơi • quà tặng xinh.
+                    </div>
+                  </div>
+
+                  <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                      <div style="padding:6px 10px;border-radius:999px;background:rgba(124,58,237,.22);border:1px solid rgba(255,255,255,.10);font-size:12px">Cinematic</div>
+                      <div style="padding:6px 10px;border-radius:999px;background:rgba(6,182,212,.18);border:1px solid rgba(255,255,255,.10);font-size:12px">Vietnam vibe</div>
+                      <div style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">FOMO</div>
+                    </div>
+                    <div style="padding:10px 12px;border-radius:14px;background:linear-gradient(135deg,#ff4d4d 0%,#ff8a3d 45%,#ffd15c 100%);color:rgba(11,13,18,.92);font-weight:800">Generate</div>
+                  </div>
+                </div>
+
+                <div style="border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:14px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                    <div style="font-size:12px;color:rgba(233,234,242,.65)">Live preview</div>
+                    <div style="font-size:12px;color:rgba(233,234,242,.65)">30s</div>
+                  </div>
+                  <div style="border-radius:18px;background:radial-gradient(600px 220px at 30% 0%, rgba(255,77,77,.18), transparent 60%),radial-gradient(520px 240px at 90% 20%, rgba(6,182,212,.18), transparent 55%),rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.10);padding:14px;min-height:190px;display:flex;flex-direction:column;gap:10px">
+                    <div style="display:flex;gap:10px;align-items:center">
+                      <div style="width:10px;height:10px;border-radius:999px;background:#22c55e"></div>
+                      <div style="font-size:13px;font-weight:650">Storyboard draft</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">Hook</div>
+                        <div style="font-size:12px;color:rgba(233,234,242,.86)">“Nhỏ xíu mà thơm lâu…”</div>
+                      </div>
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">Benefit</div>
+                        <div style="font-size:12px;color:rgba(233,234,242,.86)">6–8h, nhẹ nhàng</div>
+                      </div>
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">CTA</div>
+                        <div style="font-size:12px;color:rgba(233,234,242,.86)">“Chốt đơn hôm nay”</div>
+                      </div>
+                    </div>
+                    <div style="border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10);padding:10px">
+                      <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">Voice & subtitles</div>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <div style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">VN female</div>
+                        <div style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Bold captions</div>
+                        <div style="padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Auto highlight</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:12px;border-radius:18px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10);padding:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                      <div style="font-size:12px;color:rgba(233,234,242,.65)">Advanced</div>
+                      <div style="opacity:.75">⌘,</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">Aspect</div>
+                        <div style="font-size:12px;color:rgba(233,234,242,.86)">9:16</div>
+                      </div>
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="font-size:11px;color:rgba(233,234,242,.62);margin-bottom:6px">Speed</div>
+                        <div style="font-size:12px;color:rgba(233,234,242,.86)">Fast</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="label">Video Result Page</div>
+    <div class="mockup">
+      <div class="mockup-header">Result details + player + actions</div>
+      <div class="mockup-body">
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:radial-gradient(1000px 520px at 20% -10%, rgba(255,77,77,.24), transparent 55%),radial-gradient(900px 520px at 92% 0%, rgba(124,58,237,.32), transparent 60%),linear-gradient(180deg,#0a0b14 0%,#0c1020 100%);color:#e9eaf2">
+          <div style="display:flex;gap:0;min-height:380px">
+            <div style="width:260px;padding:18px 14px;border-right:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));backdrop-filter:blur(10px)">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 10px 14px 10px">
+                <div style="width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#7c3aed 0%,#06b6d4 52%,#22c55e 100%);display:flex;align-items:center;justify-content:center">
+                  <svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7 7L17 27L27 7" stroke="rgba(7,9,21,.94)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13 9.5C12 6.5 8.5 5 6.5 7" stroke="rgba(7,9,21,.94)" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M21 9.5C22 6.5 25.5 5 27.5 7" stroke="rgba(7,9,21,.94)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="5.6" cy="7.8" r="1.7" fill="rgba(7,9,21,.94)"/>
+                    <circle cx="28.4" cy="7.8" r="1.7" fill="rgba(7,9,21,.94)"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:750;letter-spacing:.2px">VietHay</div>
+                  <div style="font-size:12px;color:rgba(233,234,242,.62)">Video Results</div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:6px;padding:6px">
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Generate</div>
+                <div style="padding:10px 12px;border-radius:12px;background:linear-gradient(135deg,rgba(124,58,237,.32),rgba(6,182,212,.18));border:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center">
+                  <span>Video Results</span>
+                  <span style="font-size:12px;color:rgba(233,234,242,.65)">⌘R</span>
+                </div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">History</div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Templates</div>
+                <div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">Settings</div>
+              </div>
+
+              <div style="margin-top:14px;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10)">
+                <div style="font-size:12px;color:rgba(233,234,242,.65);margin-bottom:6px">Recent</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Perfume mini 10ml</div>
+                  <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(233,234,242,.75)">Skincare combo</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:1;padding:18px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div>
+                  <div style="font-size:18px;font-weight:760">Perfume mini 10ml — Result</div>
+                  <div style="font-size:12px;color:rgba(233,234,242,.62)">Version A • 9:16 • 30s • Generated 2 mins ago</div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center">
+                  <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px;color:rgba(233,234,242,.75)">Regenerate</div>
+                  <div style="padding:8px 10px;border-radius:12px;background:linear-gradient(135deg,#7c3aed 0%,#06b6d4 52%,#22c55e 100%);color:rgba(7,9,21,.94);font-weight:850">Download</div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:14px">
+                <div style="border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:14px">
+                  <div style="border-radius:16px;background:radial-gradient(520px 220px at 30% 0%, rgba(255,77,77,.18), transparent 58%),radial-gradient(520px 240px at 90% 20%, rgba(34,197,94,.16), transparent 55%),rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);aspect-ratio:9/16;display:flex;align-items:center;justify-content:center">
+                    <div style="text-align:center">
+                      <div style="font-size:42px;opacity:.9">▶</div>
+                      <div style="font-size:12px;color:rgba(233,234,242,.65)">Video player</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+                    <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Copy link</div>
+                    <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Export SRT</div>
+                    <div style="padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);font-size:12px">Watermark</div>
+                  </div>
+                </div>
+
+                <div style="border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:14px">
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+                    <div style="padding:7px 10px;border-radius:999px;background:linear-gradient(135deg,rgba(124,58,237,.30),rgba(6,182,212,.18));border:1px solid rgba(255,255,255,.12);font-size:12px">Subtitles</div>
+                    <div style="padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);font-size:12px;color:rgba(233,234,242,.75)">Prompt</div>
+                    <div style="padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);font-size:12px;color:rgba(233,234,242,.75)">Metrics</div>
+                  </div>
+
+                  <div style="border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10);padding:12px">
+                    <div style="font-size:12px;color:rgba(233,234,242,.65);margin-bottom:10px">Edit captions</div>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                          <div style="font-weight:650;font-size:12px">00:00–00:02</div>
+                          <div style="opacity:.75;font-size:12px">✎</div>
+                        </div>
+                        <div style="margin-top:6px;color:rgba(233,234,242,.86);font-size:12px">“Nhỏ xíu mà thơm lâu, sang bất ngờ!”</div>
+                      </div>
+                      <div style="border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                          <div style="font-weight:650;font-size:12px">00:02–00:06</div>
+                          <div style="opacity:.75;font-size:12px">✎</div>
+                        </div>
+                        <div style="margin-top:6px;color:rgba(233,234,242,.86);font-size:12px">Giữ hương 6–8h, hợp đi làm/đi chơi</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:12px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10);padding:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                      <div style="font-size:12px;color:rgba(233,234,242,.65)">Timeline</div>
+                      <div style="font-size:12px;color:rgba(233,234,242,.65)">30s</div>
+                    </div>
+                    <div style="height:10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);overflow:hidden">
+                      <div style="height:100%;width:42%;background:linear-gradient(90deg,rgba(255,77,77,.55),rgba(124,58,237,.55),rgba(6,182,212,.55))"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:rgba(233,234,242,.6)">
+                      <span>0s</span><span>15s</span><span>30s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

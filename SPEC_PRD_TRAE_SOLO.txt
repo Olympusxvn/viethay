@@ -1,0 +1,22 @@
+Create a complete Product Requirements Document (PRD) and Implementation Plan for "VietHay".
+
+Project Goal: Win 1st prize in Video Generation Track.
+
+Key Requirements:
+- Users can input their own PixVerse API Key (via Settings page or modal on first use). Key is saved in localStorage for easy judge self-demo.
+- UI/UX must look and feel very similar to TRAE SOLO interface (clean sidebar, card-based layout, modern minimal premium design).
+- Logo: "VietHay" logo inspired by TRAE logo style, but add 2 cute antennas on top of the "V" or main icon. Make it recognizable and memorable.
+- Beautiful homepage with hero section.
+- Main generation flow: Product info input → Script & Storyboard preview → Video generation with PixVerse → Video player with subtitle editor.
+- Video History gallery + mock analytics.
+- Fully responsive, mobile-first, low latency focus.
+
+Output clearly:
+1. Project Overview & Success Criteria
+2. Detailed Features (with priority)
+3. UI/UX & Design Direction (TRAE-inspired + VietHay logo)
+4. Technical Architecture & Folder Structure
+5. Step-by-step Implementation Plan
+6. Low-Latency & Performance Strategy
+
+Use Karpathy skills + all installed skills (especially frontend-design, byted-seedance-video-generate).

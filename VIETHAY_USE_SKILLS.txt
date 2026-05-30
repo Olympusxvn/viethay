@@ -1,0 +1,14 @@
+VIETHAY_USE_SKILLS
+
+Skill	On	Benefit
+git-commit	need	Commit code sạch
+react-best-pratices	need	Next.js/ React quality
+webapp-testing	need	Test nhanh
+composition-patterns	need	Compontent sạch
+brainstorming	need	Lập kế hoạch tốt
+frontend-design	very need	UI đẹp giống TRAE
+frontend-skill	very need	UI clean & premium
+byted-seedance-video-generate	very need	PixVerse video
+Karpathy	very need	Low latency + quality
+doc-coauthoring	need	PRD & docs
+agent-browser	Optional	Nếu cần test API

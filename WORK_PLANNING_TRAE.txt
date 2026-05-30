@@ -1,0 +1,42 @@
+You are now working on the project "VietHay" located in the current folder.
+
+We already have:
+- A professional README.md (English)
+- 11 important skills activated (including frontend-design, react-best-practices, brainstorming, frontend-skill, git-commit, etc.)
+- Karpathy Principles skill active
+- Master PixVerse Prompt Template ready
+
+Project Goal: Build a beautiful, high-quality web app to win 1st prize in the Video Generation Track at Unbound Creativity with TRAE SOLO @ Vietnam.
+
+### Project Overview
+VietHay is an AI video marketing tool for Vietnamese e-commerce sellers (Shopee, TikTok Shop, Lazada). Users input product information → AI generates optimized script + PixVerse video (30s+) → edit & download.
+
+### Key Requirements
+- Users can input their own PixVerse API Key (saved in localStorage) so judges can easily test.
+- UI/UX must be heavily inspired by TRAE SOLO interface: clean, modern, premium, minimal, excellent typography and spacing.
+- Logo: "VietHay" in similar style to TRAE logo, but add 2 cute antennas on top of the letter "V" or main icon.
+- Mobile-first, responsive, beautiful loading states, optimistic UI.
+- Strong Vietnamese cultural touch but keep it premium and professional.
+
+### Task for this session (Work Tab):
+Create a complete professional planning package:
+
+1. **Project Overview & Success Criteria** (for hackathon judging)
+2. **Detailed User Stories & Features** (prioritized - MVP + Nice-to-have)
+3. **UI/UX & Design System**
+   - Color palette (warm Vietnamese tones)
+   - Typography
+   - Component style (TRAE-inspired)
+   - Logo description (with 2 antennas)
+4. **Technical Architecture**
+   - Folder structure
+   - Tech stack (Next.js 15 App Router, TypeScript, Tailwind, shadcn/ui, etc.)
+5. **PixVerse Integration Strategy** (using byted-seedance-video-generate + Master Prompt Template)
+6. **Low-Latency & Performance Strategy** (important for live demo)
+7. **Step-by-step Implementation Plan** with clear milestones
+8. **Hackathon Pitch Script** (2-3 minutes version)
+
+Use all activated skills + Karpathy principles.
+Think deeply, be structured, and optimize everything for winning the Video Generation track (Video Quality + App Completeness + TRAE Depth).
+
+Start by outputting the full planning document with clear sections.

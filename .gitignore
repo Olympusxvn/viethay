@@ -1,0 +1,23 @@
+# Dependencies & build
+web/node_modules/
+web/.next/
+web/out/
+
+# Env & secrets
+.env
+.env.*
+web/.env*
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Large workshop assets (optional local only)
+0527_Pre-Hackathon Workshop.pdf
+.uploads/
+
+# Logs
+*.log
+npm-debug.log*
