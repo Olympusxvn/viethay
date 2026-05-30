@@ -15,7 +15,8 @@ interface GenerateBody {
 }
 
 export async function POST(req: NextRequest) {
-  const apiKey = req.headers.get("x-pixverse-key");
+  const apiKey =
+    req.headers.get("x-pixverse-key") || process.env.PIXVERSE_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "Missing PixVerse API key" }, { status: 400 });
   }

@@ -16,15 +16,29 @@ export const PIXVERSE_STATUS = {
   FAILED: 8,
 } as const;
 
+function keyHeader(apiKey?: string): Record<string, string> {
+  return apiKey ? { "x-pixverse-key": apiKey } : {};
+}
+
+export async function hasServerKey(): Promise<boolean> {
+  try {
+    const res = await fetch("/api/pixverse/config");
+    const data = await res.json();
+    return Boolean(data.hasServerKey);
+  } catch {
+    return false;
+  }
+}
+
 export async function startPixverseGeneration(
-  apiKey: string,
+  apiKey: string | undefined,
   params: PixverseParams
 ): Promise<number> {
   const res = await fetch("/api/pixverse/generate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-pixverse-key": apiKey,
+      ...keyHeader(apiKey),
     },
     body: JSON.stringify(params),
   });
@@ -36,11 +50,11 @@ export async function startPixverseGeneration(
 }
 
 export async function getPixverseResult(
-  apiKey: string,
+  apiKey: string | undefined,
   videoId: number
 ): Promise<{ status: number; url: string }> {
   const res = await fetch(`/api/pixverse/result?id=${videoId}`, {
-    headers: { "x-pixverse-key": apiKey },
+    headers: { ...keyHeader(apiKey) },
   });
   const data = await res.json();
   if (!res.ok) {

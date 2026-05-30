@@ -30,8 +30,7 @@ export default function ResultPage() {
 
   useEffect(() => {
     if (!isPending || !pixverseId) return;
-    const apiKey = getSettings().pixverseApiKey;
-    if (!apiKey) return;
+    const apiKey = getSettings().pixverseApiKey || undefined;
 
     let active = true;
     const poll = async () => {

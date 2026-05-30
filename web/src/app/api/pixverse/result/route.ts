@@ -5,7 +5,8 @@ export const runtime = "nodejs";
 const PIXVERSE_RESULT = "https://app-api.pixverse.ai/openapi/v2/video/result";
 
 export async function GET(req: NextRequest) {
-  const apiKey = req.headers.get("x-pixverse-key");
+  const apiKey =
+    req.headers.get("x-pixverse-key") || process.env.PIXVERSE_API_KEY;
   const id = req.nextUrl.searchParams.get("id");
 
   if (!apiKey) {

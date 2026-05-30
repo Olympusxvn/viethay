@@ -18,7 +18,7 @@ import {
   simulateVideoGeneration,
   updateVideo,
 } from "@/lib/video-store";
-import { startPixverseGeneration } from "@/lib/pixverse-client";
+import { startPixverseGeneration, hasServerKey } from "@/lib/pixverse-client";
 import type { GenerateInput, GeneratedScript, VideoGoal, VideoStyle } from "@/lib/types";
 
 const STYLES: { id: VideoStyle; labelKey: TranslationKey }[] = [
@@ -88,10 +88,11 @@ export function GenerateForm() {
     setLoading(true);
     const project = createVideo(input, generatedScript);
     const apiKey = getSettings().pixverseApiKey;
+    const useReal = Boolean(apiKey) || (await hasServerKey());
 
-    if (apiKey) {
+    if (useReal) {
       try {
-        const videoId = await startPixverseGeneration(apiKey, {
+        const videoId = await startPixverseGeneration(apiKey || undefined, {
           prompt: generatedScript.finalPrompt,
           negativePrompt: generatedScript.negativePrompt,
           aspectRatio: "9:16",
@@ -100,11 +101,9 @@ export function GenerateForm() {
           model: "v4.5",
         });
         updateVideo(project.id, { pixverseId: videoId, real: true });
-      } catch (err) {
-        updateVideo(project.id, {
-          status: "failed",
-          error: err instanceof Error ? err.message : "PixVerse error",
-        });
+      } catch {
+        // PixVerse unavailable (bad key / no credits) — fall back to demo
+        await simulateVideoGeneration(project.id, false);
       }
     } else {
       await simulateVideoGeneration(project.id, false);
