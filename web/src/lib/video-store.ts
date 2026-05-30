@@ -17,10 +17,20 @@ function readRaw(): VideoProject[] {
   if (typeof window === "undefined") return EMPTY;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as VideoProject[]) : [];
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as VideoProject[];
+    return parsed.map(migrateVideoUrl);
   } catch {
     return [];
   }
+}
+
+/** Old demo URLs (private GCS bucket) now return AccessDenied — heal them. */
+function migrateVideoUrl(v: VideoProject): VideoProject {
+  if (v.videoUrl && v.videoUrl.includes("gtv-videos-bucket")) {
+    return { ...v, videoUrl: pickDemoVideo(v.id) };
+  }
+  return v;
 }
 
 function rebuild(): VideoProject[] {
@@ -106,9 +116,21 @@ export function deleteVideo(id: string): void {
   writeAll(readRaw().filter((v) => v.id !== id));
 }
 
-/** Demo video URL — replace with PixVerse output when API key is configured */
-export const DEMO_VIDEO_URL =
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+/**
+ * Public demo videos used in demo mode (no PixVerse key). Replace with the
+ * real PixVerse render output once an API key is configured.
+ */
+export const DEMO_VIDEO_POOL = [
+  "https://media.w3.org/2010/05/sintel/trailer.mp4",
+  "https://media.w3.org/2010/05/bunny/trailer.mp4",
+  "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_2MB.mp4",
+];
+
+export function pickDemoVideo(seed: string): string {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return DEMO_VIDEO_POOL[h % DEMO_VIDEO_POOL.length];
+}
 
 export async function simulateVideoGeneration(
   projectId: string,
@@ -118,7 +140,7 @@ export async function simulateVideoGeneration(
   await new Promise((r) => setTimeout(r, delay));
   updateVideo(projectId, {
     status: "ready",
-    videoUrl: DEMO_VIDEO_URL,
+    videoUrl: pickDemoVideo(projectId),
     thumbnailUrl: undefined,
   });
 }
