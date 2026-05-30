@@ -58,7 +58,10 @@ export const translations = {
 
     "result.history": "Lịch sử",
     "result.notFound": "Không tìm thấy video.",
-    "result.rendering": "PixVerse đang render video 30s+…",
+    "result.rendering": "PixVerse đang render video…",
+    "result.realNote": "Video thật từ PixVerse — quá trình render có thể mất 1–3 phút.",
+    "result.failed": "Tạo video thất bại",
+    "result.retry": "Thử lại",
     "result.download": "Tải xuống",
     "result.copyLink": "Sao chép link",
     "result.analytics": "Phân tích (mô phỏng)",
@@ -99,7 +102,7 @@ export const translations = {
     "settings.save": "Lưu cài đặt",
     "settings.saved": "Đã lưu ✓",
     "settings.note":
-      "Không có key → chế độ demo với video mẫu. Có key → sẵn sàng tích hợp PixVerse API trong phiên bản tiếp theo.",
+      "Không có key → chế độ demo với video mẫu. Có key → gọi PixVerse API thật để tạo video quảng cáo sản phẩm (8s, 9:16).",
     "settings.language": "Ngôn ngữ",
 
     "dialog.title": "PixVerse API Key",
@@ -165,7 +168,10 @@ export const translations = {
 
     "result.history": "History",
     "result.notFound": "Video not found.",
-    "result.rendering": "PixVerse is rendering a 30s+ video…",
+    "result.rendering": "PixVerse is rendering your video…",
+    "result.realNote": "Real PixVerse video — rendering can take 1–3 minutes.",
+    "result.failed": "Video generation failed",
+    "result.retry": "Try again",
     "result.download": "Download",
     "result.copyLink": "Copy link",
     "result.analytics": "Mock Analytics",
@@ -206,7 +212,7 @@ export const translations = {
     "settings.save": "Save settings",
     "settings.saved": "Saved ✓",
     "settings.note":
-      "No key → demo mode with a sample video. With a key → ready for PixVerse API integration in the next version.",
+      "No key → demo mode with a sample video. With a key → calls the real PixVerse API to generate a product ad video (8s, 9:16).",
     "settings.language": "Language",
 
     "dialog.title": "PixVerse API Key",

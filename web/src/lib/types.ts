@@ -36,6 +36,11 @@ export interface VideoProject {
   thumbnailUrl?: string;
   mockViews?: number;
   mockCtr?: number;
+  /** PixVerse video_id when generated via the real API */
+  pixverseId?: number;
+  /** Whether this was produced by the real PixVerse API (vs demo sample) */
+  real?: boolean;
+  error?: string;
 }
 
 export interface AppSettings {

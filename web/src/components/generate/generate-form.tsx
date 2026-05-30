@@ -16,7 +16,9 @@ import type { TranslationKey } from "@/lib/i18n";
 import {
   createVideo,
   simulateVideoGeneration,
+  updateVideo,
 } from "@/lib/video-store";
+import { startPixverseGeneration } from "@/lib/pixverse-client";
 import type { GenerateInput, GeneratedScript, VideoGoal, VideoStyle } from "@/lib/types";
 
 const STYLES: { id: VideoStyle; labelKey: TranslationKey }[] = [
@@ -85,8 +87,29 @@ export function GenerateForm() {
     const generatedScript = script ?? generateScript(input);
     setLoading(true);
     const project = createVideo(input, generatedScript);
-    const hasKey = Boolean(getSettings().pixverseApiKey);
-    await simulateVideoGeneration(project.id, hasKey);
+    const apiKey = getSettings().pixverseApiKey;
+
+    if (apiKey) {
+      try {
+        const videoId = await startPixverseGeneration(apiKey, {
+          prompt: generatedScript.finalPrompt,
+          negativePrompt: generatedScript.negativePrompt,
+          aspectRatio: "9:16",
+          duration: 8,
+          quality: "540p",
+          model: "v4.5",
+        });
+        updateVideo(project.id, { pixverseId: videoId, real: true });
+      } catch (err) {
+        updateVideo(project.id, {
+          status: "failed",
+          error: err instanceof Error ? err.message : "PixVerse error",
+        });
+      }
+    } else {
+      await simulateVideoGeneration(project.id, false);
+    }
+
     setLoading(false);
     router.push(`/results/${project.id}`);
   }

@@ -1,16 +1,18 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Download, Copy, Loader2, ArrowLeft } from "lucide-react";
+import { Download, Copy, Loader2, ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useExternalStore } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
-import { getVideo, subscribeVideos } from "@/lib/video-store";
+import { getVideo, subscribeVideos, updateVideo } from "@/lib/video-store";
+import { getPixverseResult, PIXVERSE_STATUS } from "@/lib/pixverse-client";
+import { getSettings } from "@/lib/storage";
 
 export default function ResultPage() {
   const { t } = useTranslation();
@@ -22,6 +24,46 @@ export default function ResultPage() {
     getSnapshot,
     () => undefined
   );
+
+  const pixverseId = project?.pixverseId;
+  const isPending = project?.status === "generating";
+
+  useEffect(() => {
+    if (!isPending || !pixverseId) return;
+    const apiKey = getSettings().pixverseApiKey;
+    if (!apiKey) return;
+
+    let active = true;
+    const poll = async () => {
+      try {
+        const { status, url } = await getPixverseResult(apiKey, pixverseId);
+        if (!active) return;
+        if (status === PIXVERSE_STATUS.SUCCESS && url) {
+          updateVideo(id, { status: "ready", videoUrl: url });
+        } else if (
+          status === PIXVERSE_STATUS.MODERATION_FAILED ||
+          status === PIXVERSE_STATUS.FAILED ||
+          status === PIXVERSE_STATUS.DELETED
+        ) {
+          updateVideo(id, {
+            status: "failed",
+            error:
+              status === PIXVERSE_STATUS.MODERATION_FAILED
+                ? "Content moderation failed"
+                : "PixVerse generation failed",
+          });
+        }
+      } catch {
+        /* transient network error — keep polling */
+      }
+    };
+    poll();
+    const iv = setInterval(poll, 5000);
+    return () => {
+      active = false;
+      clearInterval(iv);
+    };
+  }, [id, isPending, pixverseId]);
   const [subs, setSubs] = useState(() =>
     project?.script.subtitles
       ? project.script.subtitles
@@ -45,6 +87,7 @@ export default function ResultPage() {
   }
 
   const isGenerating = project.status === "generating";
+  const isFailed = project.status === "failed";
   const subtitleDefault = project.script.subtitles
     .map((s) => `[${s.start}s-${s.end}s] ${s.text}`)
     .join("\n");
@@ -69,9 +112,29 @@ export default function ResultPage() {
           <CardContent className="p-0">
             <div className="relative aspect-[9/16] max-h-[70vh] w-full bg-black md:aspect-video md:max-h-none">
               {isGenerating ? (
-                <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-3">
+                <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-3 px-6 text-center">
                   <Loader2 className="size-10 animate-spin text-[#ff8a3d]" />
                   <p className="text-sm text-[#e9eaf2]/70">{t("result.rendering")}</p>
+                  {project.real && (
+                    <p className="text-xs text-[#e9eaf2]/45">
+                      {t("result.realNote")}
+                    </p>
+                  )}
+                </div>
+              ) : isFailed ? (
+                <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-3 px-6 text-center">
+                  <AlertTriangle className="size-10 text-red-400" />
+                  <p className="text-sm text-[#e9eaf2]/80">{t("result.failed")}</p>
+                  {project.error && (
+                    <p className="text-xs text-[#e9eaf2]/50">{project.error}</p>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    render={<Link href="/generate" />}
+                  >
+                    {t("result.retry")}
+                  </Button>
                 </div>
               ) : project.videoUrl ? (
                 <video
@@ -122,7 +185,7 @@ export default function ResultPage() {
             <CardContent className="grid grid-cols-2 gap-3 pb-4">
               <Stat label={t("result.views")} value={String(project.mockViews ?? 0)} />
               <Stat label={t("result.ctr")} value={String(project.mockCtr ?? 0)} />
-              <Stat label={t("result.duration")} value="30s+" />
+              <Stat label={t("result.duration")} value={project.real ? "8s" : "30s+"} />
               <Stat label={t("result.platform")} value={project.input.goal} />
             </CardContent>
           </Card>

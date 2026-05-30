@@ -1,0 +1,50 @@
+export interface PixverseParams {
+  prompt: string;
+  negativePrompt?: string;
+  aspectRatio?: string;
+  duration?: number;
+  quality?: string;
+  model?: string;
+}
+
+/** PixVerse status codes from the result endpoint */
+export const PIXVERSE_STATUS = {
+  SUCCESS: 1,
+  GENERATING: 5,
+  DELETED: 6,
+  MODERATION_FAILED: 7,
+  FAILED: 8,
+} as const;
+
+export async function startPixverseGeneration(
+  apiKey: string,
+  params: PixverseParams
+): Promise<number> {
+  const res = await fetch("/api/pixverse/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-pixverse-key": apiKey,
+    },
+    body: JSON.stringify(params),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "PixVerse generation failed");
+  }
+  return data.videoId as number;
+}
+
+export async function getPixverseResult(
+  apiKey: string,
+  videoId: number
+): Promise<{ status: number; url: string }> {
+  const res = await fetch(`/api/pixverse/result?id=${videoId}`, {
+    headers: { "x-pixverse-key": apiKey },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "PixVerse status failed");
+  }
+  return { status: data.status as number, url: (data.url as string) ?? "" };
+}
