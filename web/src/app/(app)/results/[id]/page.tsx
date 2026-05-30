@@ -13,6 +13,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { getVideo, subscribeVideos, updateVideo } from "@/lib/video-store";
 import { getPixverseResult, PIXVERSE_STATUS } from "@/lib/pixverse-client";
 import { getSettings } from "@/lib/storage";
+import { ReelPlayer } from "@/components/results/reel-player";
 
 export default function ResultPage() {
   const { t } = useTranslation();
@@ -135,6 +136,8 @@ export default function ResultPage() {
                     {t("result.retry")}
                   </Button>
                 </div>
+              ) : project.reel && project.reel.length > 0 ? (
+                <ReelPlayer shots={project.reel} />
               ) : project.videoUrl ? (
                 <video
                   src={project.videoUrl}
@@ -184,7 +187,16 @@ export default function ResultPage() {
             <CardContent className="grid grid-cols-2 gap-3 pb-4">
               <Stat label={t("result.views")} value={String(project.mockViews ?? 0)} />
               <Stat label={t("result.ctr")} value={String(project.mockCtr ?? 0)} />
-              <Stat label={t("result.duration")} value={project.real ? "8s" : "30s+"} />
+              <Stat
+                label={t("result.duration")}
+                value={
+                  project.reel && project.reel.length > 0
+                    ? `${project.reel.reduce((s, r) => s + (r.duration || 0), 0)}s`
+                    : project.real
+                      ? "8s"
+                      : "30s+"
+                }
+              />
               <Stat label={t("result.platform")} value={project.input.goal} />
             </CardContent>
           </Card>

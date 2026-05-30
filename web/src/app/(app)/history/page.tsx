@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Trash2, Play, BarChart3 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Trash2, Play, BarChart3, Sparkles, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useExternalStore } from "@/hooks/use-client-store";
@@ -9,19 +11,44 @@ import { useTranslation } from "@/hooks/use-translation";
 import {
   deleteVideo,
   getServerVideos,
+  importDemoReel,
   listVideos,
   subscribeVideos,
 } from "@/lib/video-store";
 
 export default function HistoryPage() {
   const { t } = useTranslation();
+  const router = useRouter();
   const videos = useExternalStore(subscribeVideos, listVideos, getServerVideos);
+  const [importing, setImporting] = useState(false);
+
+  async function handleImportReel() {
+    setImporting(true);
+    const project = await importDemoReel();
+    setImporting(false);
+    if (project) router.push(`/results/${project.id}`);
+  }
 
   return (
     <main className="flex-1 p-4 md:p-6">
-      <div className="mb-6">
-        <h1 className="text-lg font-semibold text-[#f5f5f7]">{t("history.title")}</h1>
-        <p className="text-xs text-[#e9eaf2]/60">{t("history.subtitle")}</p>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-lg font-semibold text-[#f5f5f7]">{t("history.title")}</h1>
+          <p className="text-xs text-[#e9eaf2]/60">{t("history.subtitle")}</p>
+        </div>
+        <Button
+          variant="outline"
+          onClick={handleImportReel}
+          disabled={importing}
+          className="border-violet-400/30 bg-violet-500/15 text-violet-100"
+        >
+          {importing ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            <Sparkles className="size-4" />
+          )}
+          {t("history.loadReel")}
+        </Button>
       </div>
 
       {videos.length === 0 ? (

@@ -26,6 +26,15 @@ export interface GeneratedScript {
   subtitles: { start: number; end: number; text: string }[];
 }
 
+export interface ReelShot {
+  title: string;
+  prompt: string;
+  videoUrl: string;
+  coverUrl?: string;
+  duration: number;
+  model?: string;
+}
+
 export interface VideoProject {
   id: string;
   createdAt: string;
@@ -40,6 +49,8 @@ export interface VideoProject {
   pixverseId?: number;
   /** Whether this was produced by the real PixVerse API (vs demo sample) */
   real?: boolean;
+  /** Multi-shot reel assembled from real PixVerse clips (>= 30s total) */
+  reel?: ReelShot[];
   error?: string;
 }
 

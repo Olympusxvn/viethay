@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "pixverse-ai-image-and-video-generator": {
+      "source": "pixverseai/skills",
+      "sourceType": "github",
+      "skillPath": "skills/SKILL.md",
+      "computedHash": "07fefa4db0a8ef60080847f6b53d68e42e15af0399bdfc21edca5a107ea4b4c2"
+    }
+  }
+}

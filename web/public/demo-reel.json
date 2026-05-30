@@ -1,0 +1,44 @@
+{
+  "product": "Vietnamese Cold-Brew Coffee",
+  "generatedAt": "2026-05-30T08:45:39.756Z",
+  "totalDuration": 32,
+  "totalCost": 256,
+  "shots": [
+    {
+      "title": "Hook",
+      "prompt": "Cinematic vertical product ad, extreme close-up of a frosted glass bottle of Vietnamese cold-brew coffee on a marble cafe table, warm morning sunlight, condensation droplets sliding down, slow push-in, shallow depth of field, premium commercial look",
+      "videoUrl": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2F8670c209-1352-4a3d-bbfd-d806d3b406f5_seed0.mp4",
+      "coverUrl": "https://media.pixverse.ai/pixverse%2Fvideo%2Fframe%2F1e368739-37ed-4e61-a865-3be755de6f1f.jpg",
+      "duration": 8,
+      "model": "v6",
+      "cost": 64
+    },
+    {
+      "title": "Product action",
+      "prompt": "Vertical commercial shot, dark rich cold-brew coffee pouring over clear ice cubes into a glass, dynamic splash, slow motion, warm backlight, appetizing food cinematography, high detail",
+      "videoUrl": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2Fde0362ec-85cd-460a-9930-94def5bcd5fe_seed0.mp4",
+      "coverUrl": "https://media.pixverse.ai/pixverse%2Fvideo%2Fframe%2F88562112-2ee9-4617-898d-e84f8c3c9844.jpg",
+      "duration": 8,
+      "model": "v6",
+      "cost": 64
+    },
+    {
+      "title": "Lifestyle",
+      "prompt": "Vertical lifestyle ad, a young Vietnamese woman smiling and sipping iced cold-brew coffee at a cozy Saigon cafe, soft natural light, bokeh background, gentle camera movement, commercial look",
+      "videoUrl": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2Ffb505a6e-1354-424a-a5cf-53ec20963c5d_seed0.mp4",
+      "coverUrl": "https://media.pixverse.ai/pixverse%2Fvideo%2Fframe%2F8fd0d48f-3e40-4a46-8962-4b22cc2c8511.jpg",
+      "duration": 8,
+      "model": "v6",
+      "cost": 64
+    },
+    {
+      "title": "CTA hero",
+      "prompt": "Vertical hero shot of a Vietnamese cold-brew coffee bottle standing on a table with warm rim light, brand-style background, subtle sparkle, upbeat energetic ending, product centered and clearly visible",
+      "videoUrl": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2F668a048e-5569-4020-aaf8-2c046384fb63_seed0.mp4",
+      "coverUrl": "https://media.pixverse.ai/pixverse%2Fvideo%2Fframe%2F7bb89bda-e0aa-45ed-a2ca-fa0a23fd684a.jpg",
+      "duration": 8,
+      "model": "v6",
+      "cost": 64
+    }
+  ]
+}

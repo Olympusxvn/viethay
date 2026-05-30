@@ -1,4 +1,5 @@
-import type { GenerateInput, GeneratedScript, VideoProject } from "./types";
+import type { GenerateInput, GeneratedScript, ReelShot, VideoProject } from "./types";
+import { generateScript } from "./script-generator";
 
 const STORAGE_KEY = "viethay_videos";
 const EVENT = "viethay-videos-updated";
@@ -114,6 +115,55 @@ export function updateVideo(
 
 export function deleteVideo(id: string): void {
   writeAll(readRaw().filter((v) => v.id !== id));
+}
+
+/** Create a ready project backed by a real multi-shot PixVerse reel (>=30s). */
+export function createReelProject(
+  productName: string,
+  shots: ReelShot[]
+): VideoProject {
+  const input: GenerateInput = {
+    productName,
+    description: shots[0]?.prompt ?? "",
+    style: "premium",
+    goal: "tiktok",
+    imageDataUrls: [],
+  };
+  const project: VideoProject = {
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+    input,
+    script: generateScript(input),
+    status: "ready",
+    real: true,
+    reel: shots,
+    videoUrl: shots[0]?.videoUrl,
+    thumbnailUrl: shots[0]?.coverUrl,
+    mockViews: Math.floor(1200 + Math.random() * 8000),
+    mockCtr: Math.round((2.4 + Math.random() * 4.2) * 10) / 10,
+  };
+  const all = readRaw().slice();
+  all.unshift(project);
+  writeAll(all);
+  return project;
+}
+
+interface DemoReelFile {
+  product: string;
+  shots: ReelShot[];
+}
+
+/** Load the prebuilt PixVerse demo reel (generated via the CLI) into history. */
+export async function importDemoReel(): Promise<VideoProject | null> {
+  try {
+    const res = await fetch("/demo-reel.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = (await res.json()) as DemoReelFile;
+    if (!data.shots?.length) return null;
+    return createReelProject(data.product || "PixVerse Demo", data.shots);
+  } catch {
+    return null;
+  }
 }
 
 /**
