@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Upload } from "lucide-react";
+import { Loader2, Upload, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,6 +19,7 @@ import {
   updateVideo,
 } from "@/lib/video-store";
 import { startPixverseGeneration, hasServerKey } from "@/lib/pixverse-client";
+import { suggestDescriptions } from "@/lib/ai-client";
 import type { GenerateInput, GeneratedScript, VideoGoal, VideoStyle } from "@/lib/types";
 
 const STYLES: { id: VideoStyle; labelKey: TranslationKey }[] = [
@@ -47,6 +48,21 @@ export function GenerateForm() {
   const [script, setScript] = useState<GeneratedScript | null>(null);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<"form" | "preview">("form");
+  const [suggesting, setSuggesting] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  async function handleSuggest() {
+    if (!productName.trim()) return;
+    setSuggesting(true);
+    const { suggestions: out } = await suggestDescriptions({
+      productName,
+      seed: description,
+      style,
+      goal,
+    });
+    setSuggestions(out);
+    setSuggesting(false);
+  }
 
   const onFiles = useCallback((files: FileList | null) => {
     if (!files) return;
@@ -217,15 +233,47 @@ export function GenerateForm() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">
-                {t("gen.description")}
-              </label>
+              <div className="mb-1.5 flex items-center justify-between gap-2">
+                <label className="block text-xs text-[#e9eaf2]/60">
+                  {t("gen.description")}
+                </label>
+                <button
+                  type="button"
+                  onClick={handleSuggest}
+                  disabled={!productName.trim() || suggesting}
+                  className="inline-flex items-center gap-1 rounded-full border border-violet-400/30 bg-violet-500/15 px-2.5 py-1 text-[11px] font-medium text-violet-200 transition-colors hover:bg-violet-500/25 disabled:opacity-40"
+                >
+                  {suggesting ? (
+                    <Loader2 className="size-3 animate-spin" />
+                  ) : (
+                    <Sparkles className="size-3" />
+                  )}
+                  {t("gen.aiSuggest")}
+                </button>
+              </div>
               <Textarea
                 placeholder={t("gen.descriptionPh")}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="min-h-[80px] border-white/10 bg-white/[0.06]"
               />
+              {suggestions.length > 0 && (
+                <div className="mt-2 space-y-1.5">
+                  <p className="text-[10px] uppercase tracking-wide text-[#e9eaf2]/40">
+                    {t("gen.aiSuggestHint")}
+                  </p>
+                  {suggestions.map((sug, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setDescription(sug)}
+                      className="block w-full rounded-lg border border-white/8 bg-black/25 p-2 text-left text-xs text-[#e9eaf2]/85 transition-colors hover:border-violet-400/40 hover:bg-violet-500/10"
+                    >
+                      {sug}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div>
