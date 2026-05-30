@@ -1,29 +1,21 @@
 "use client";
 
-import { useCallback } from "react";
 import Link from "next/link";
 import { Trash2, Play, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useExternalStore } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
-import { deleteVideo, listVideos } from "@/lib/video-store";
-
-function subscribeVideos(onChange: () => void) {
-  window.addEventListener("storage", onChange);
-  window.addEventListener("viethay-videos-updated", onChange);
-  return () => {
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener("viethay-videos-updated", onChange);
-  };
-}
+import {
+  deleteVideo,
+  getServerVideos,
+  listVideos,
+  subscribeVideos,
+} from "@/lib/video-store";
 
 export default function HistoryPage() {
   const { t } = useTranslation();
-  const videos = useExternalStore(subscribeVideos, listVideos, () => []);
-  const refresh = useCallback(() => {
-    window.dispatchEvent(new Event("viethay-videos-updated"));
-  }, []);
+  const videos = useExternalStore(subscribeVideos, listVideos, getServerVideos);
 
   return (
     <main className="flex-1 p-4 md:p-6">
@@ -73,10 +65,7 @@ export default function HistoryPage() {
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() => {
-                      deleteVideo(v.id);
-                      refresh();
-                    }}
+                    onClick={() => deleteVideo(v.id)}
                   >
                     <Trash2 className="size-4" />
                   </Button>

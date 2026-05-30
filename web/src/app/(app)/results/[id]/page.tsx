@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Download, Copy, Loader2, ArrowLeft } from "lucide-react";
@@ -10,20 +10,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useExternalStore } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
-import { getVideo } from "@/lib/video-store";
-
-function subscribeVideos(onChange: () => void) {
-  window.addEventListener("viethay-videos-updated", onChange);
-  return () => window.removeEventListener("viethay-videos-updated", onChange);
-}
+import { getVideo, subscribeVideos } from "@/lib/video-store";
 
 export default function ResultPage() {
   const { t } = useTranslation();
   const params = useParams();
   const id = params.id as string;
+  const getSnapshot = useCallback(() => getVideo(id), [id]);
   const project = useExternalStore(
     subscribeVideos,
-    () => getVideo(id),
+    getSnapshot,
     () => undefined
   );
   const [subs, setSubs] = useState(() =>
