@@ -11,18 +11,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { generateScript } from "@/lib/script-generator";
 import { getSettings } from "@/lib/storage";
+import { useTranslation } from "@/hooks/use-translation";
+import type { TranslationKey } from "@/lib/i18n";
 import {
   createVideo,
   simulateVideoGeneration,
 } from "@/lib/video-store";
 import type { GenerateInput, GeneratedScript, VideoGoal, VideoStyle } from "@/lib/types";
 
-const STYLES: { id: VideoStyle; label: string }[] = [
-  { id: "tiktok", label: "TikTok Viral" },
-  { id: "shopee", label: "Shopee Sale" },
-  { id: "premium", label: "Premium" },
-  { id: "funny", label: "Hài hước" },
-  { id: "lazada", label: "Lazada" },
+const STYLES: { id: VideoStyle; labelKey: TranslationKey }[] = [
+  { id: "tiktok", labelKey: "style.tiktok" },
+  { id: "shopee", labelKey: "style.shopee" },
+  { id: "premium", labelKey: "style.premium" },
+  { id: "funny", labelKey: "style.funny" },
+  { id: "lazada", labelKey: "style.lazada" },
 ];
 
 const GOALS: { id: VideoGoal; label: string }[] = [
@@ -33,6 +35,7 @@ const GOALS: { id: VideoGoal; label: string }[] = [
 
 export function GenerateForm() {
   const router = useRouter();
+  const { t } = useTranslation();
   const fileRef = useRef<HTMLInputElement>(null);
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -92,19 +95,15 @@ export function GenerateForm() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-lg font-semibold text-[#f5f5f7]">
-            Generate a Product Video
-          </h1>
-          <p className="text-xs text-[#e9eaf2]/60">
-            Upload images → describe product → pick style → generate
-          </p>
+          <h1 className="text-lg font-semibold text-[#f5f5f7]">{t("gen.title")}</h1>
+          <p className="text-xs text-[#e9eaf2]/60">{t("gen.subtitle")}</p>
         </div>
         <div className="flex gap-2">
           <Badge variant="outline" className="border-white/10 bg-white/5 text-[#e9eaf2]/75">
-            Credits: 12
+            {t("gen.credits")}: 12
           </Badge>
           <Badge variant="outline" className="border-white/10 bg-white/5 text-[#e9eaf2]/75">
-            VN Tone: On
+            {t("gen.vnTone")}: {t("gen.on")}
           </Badge>
         </div>
       </div>
@@ -112,7 +111,7 @@ export function GenerateForm() {
       <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
         <Card className="border-white/10 bg-white/[0.06] py-0 ring-white/10">
           <CardHeader className="border-b border-white/8 py-3">
-            <CardTitle className="text-sm text-[#e9eaf2]/70">Product assets</CardTitle>
+            <CardTitle className="text-sm text-[#e9eaf2]/70">{t("gen.productAssets")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 pt-4">
             <div
@@ -131,13 +130,11 @@ export function GenerateForm() {
                 <Upload className="size-5 text-[#e9eaf2]/80" />
               </div>
               <div className="flex-1">
-                <div className="font-medium text-[#f5f5f7]">Drop images to upload</div>
-                <div className="text-xs text-[#e9eaf2]/60">
-                  JPG/PNG up to 10MB • 1–6 images recommended
-                </div>
+                <div className="font-medium text-[#f5f5f7]">{t("gen.dropImages")}</div>
+                <div className="text-xs text-[#e9eaf2]/60">{t("gen.dropHint")}</div>
               </div>
               <Button size="sm" variant="outline" type="button">
-                Browse
+                {t("gen.browse")}
               </Button>
               <input
                 ref={fileRef}
@@ -166,17 +163,17 @@ export function GenerateForm() {
             <div className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">
-                  Product name
+                  {t("gen.productName")}
                 </label>
                 <Input
-                  placeholder="Nước hoa mini 10ml"
+                  placeholder={t("gen.productNamePh")}
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
                   className="border-white/10 bg-white/[0.06]"
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">Goal</label>
+                <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">{t("gen.goal")}</label>
                 <div className="flex flex-wrap gap-2">
                   {GOALS.map((g) => (
                     <button
@@ -199,10 +196,10 @@ export function GenerateForm() {
 
             <div>
               <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">
-                Description
+                {t("gen.description")}
               </label>
               <Textarea
-                placeholder="Mùi nhẹ, sang, giữ hương 6–8h • quà tặng xinh..."
+                placeholder={t("gen.descriptionPh")}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="min-h-[80px] border-white/10 bg-white/[0.06]"
@@ -210,7 +207,7 @@ export function GenerateForm() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">Style</label>
+              <label className="mb-1.5 block text-xs text-[#e9eaf2]/60">{t("gen.style")}</label>
               <div className="flex flex-wrap gap-2">
                 {STYLES.map((s) => (
                   <button
@@ -224,7 +221,7 @@ export function GenerateForm() {
                         : "border-white/10 bg-white/[0.04]"
                     )}
                   >
-                    {s.label}
+                    {t(s.labelKey)}
                   </button>
                 ))}
               </div>
@@ -238,7 +235,7 @@ export function GenerateForm() {
                   onClick={handlePreviewScript}
                   disabled={!productName.trim()}
                 >
-                  Preview Script
+                  {t("gen.previewScript")}
                 </Button>
               ) : (
                 <Button
@@ -246,7 +243,7 @@ export function GenerateForm() {
                   variant="ghost"
                   onClick={() => setStep("form")}
                 >
-                  ← Edit inputs
+                  {t("gen.editInputs")}
                 </Button>
               )}
               <Button
@@ -259,10 +256,10 @@ export function GenerateForm() {
                 {loading ? (
                   <>
                     <Loader2 className="animate-spin" />
-                    Generating…
+                    {t("gen.generating")}
                   </>
                 ) : (
-                  "Generate Video"
+                  t("gen.generate")
                 )}
               </Button>
             </div>
@@ -272,7 +269,7 @@ export function GenerateForm() {
         <Card className="border-white/10 bg-white/[0.04] py-0 ring-white/10">
           <CardHeader className="border-b border-white/8 py-3">
             <CardTitle className="text-sm text-[#e9eaf2]/70">
-              {step === "preview" ? "Script & Storyboard" : "Live preview"}
+              {step === "preview" ? t("gen.scriptStoryboard") : t("gen.livePreview")}
             </CardTitle>
           </CardHeader>
           <CardContent className="max-h-[520px] space-y-3 overflow-y-auto pt-4">
@@ -293,16 +290,14 @@ export function GenerateForm() {
                   </div>
                 ))}
                 <div className="rounded-xl border border-white/8 bg-black/30 p-3 text-xs">
-                  <div className="mb-1 font-medium text-[#e9eaf2]/60">PixVerse prompt</div>
+                  <div className="mb-1 font-medium text-[#e9eaf2]/60">{t("gen.pixversePrompt")}</div>
                   <p className="text-[#e9eaf2]/90">{script.finalPrompt}</p>
                 </div>
               </>
             ) : (
               <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-white/12 bg-black/20 p-6 text-center">
                 <ClapperboardIcon />
-                <p className="mt-3 text-sm text-[#e9eaf2]/65">
-                  Nhập thông tin sản phẩm và bấm Preview Script để xem kịch bản 30s+
-                </p>
+                <p className="mt-3 text-sm text-[#e9eaf2]/65">{t("gen.placeholder")}</p>
               </div>
             )}
           </CardContent>

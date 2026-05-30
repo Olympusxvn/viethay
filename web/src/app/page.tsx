@@ -1,24 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap, Globe } from "lucide-react";
 import { VietHayLogo } from "@/components/shell/viethay-logo";
+import { LanguageToggle } from "@/components/i18n/language-toggle";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/use-translation";
 
 export default function HomePage() {
+  const { t } = useTranslation();
+
   return (
     <div className="viethay-landing relative min-h-full overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_20%_-10%,rgba(124,58,237,.35),transparent_55%),radial-gradient(900px_520px_at_90%_0%,rgba(6,182,212,.28),transparent_60%)]" />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-5 md:px-10">
         <VietHayLogo size="md" />
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <LanguageToggle />
           <Button variant="ghost" className="text-[#e9eaf2]/80" render={<Link href="/settings" />}>
-            Settings
+            {t("nav.settings")}
           </Button>
           <Button
             className="bg-gradient-to-r from-[#ff4d4d] to-[#ff8a3d] text-[#0b0d12]"
             render={<Link href="/generate" />}
           >
-            Open App
+            {t("landing.openApp")}
           </Button>
         </div>
       </header>
@@ -26,21 +33,19 @@ export default function HomePage() {
       <main className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pb-20 pt-8 text-center md:pt-16">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#e9eaf2]/70">
           <Sparkles className="size-3 text-[#ff8a3d]" />
-          Unbound Creativity · TRAE SOLO @ Vietnam · Video Generation Track
+          {t("landing.badge")}
         </div>
 
         <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-[#f5f5f7] md:text-5xl lg:text-6xl">
-          Từ mô tả sản phẩm đến{" "}
+          {t("landing.title1")}{" "}
           <span className="bg-gradient-to-r from-[#ff4d4d] via-[#ff8a3d] to-[#ffd15c] bg-clip-text text-transparent">
-            video bán hàng viral
+            {t("landing.titleHighlight")}
           </span>{" "}
-          trong 60 giây
+          {t("landing.title2")}
         </h1>
 
         <p className="mt-5 max-w-2xl text-base text-[#e9eaf2]/70 md:text-lg">
-          VietHay giúp seller Shopee, TikTok Shop & Lazada tạo video marketing
-          chất lượng cao, văn hóa Việt, tối ưu cho PixVerse — 100% xây bằng TRAE
-          SOLO.
+          {t("landing.subtitle")}
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -49,7 +54,7 @@ export default function HomePage() {
             className="h-11 gap-2 bg-gradient-to-r from-[#ff4d4d] via-[#ff8a3d] to-[#ffd15c] px-8 text-[#0b0d12] hover:opacity-90"
             render={<Link href="/generate" />}
           >
-            Bắt đầu tạo video
+            {t("landing.cta")}
             <ArrowRight className="size-4" />
           </Button>
           <Button
@@ -58,31 +63,29 @@ export default function HomePage() {
             className="h-11 border-white/15 bg-white/5"
             render={<Link href="/history" />}
           >
-            Xem History
+            {t("landing.viewHistory")}
           </Button>
         </div>
 
         <div className="mt-16 grid w-full max-w-3xl gap-4 text-left sm:grid-cols-3">
           <Feature
             icon={<Zap className="size-5 text-[#ff8a3d]" />}
-            title="60 giây"
-            desc="Script + storyboard + video 30s+ tự động"
+            title={t("landing.feat1Title")}
+            desc={t("landing.feat1Desc")}
           />
           <Feature
             icon={<Globe className="size-5 text-cyan-400" />}
-            title="Văn hóa VN"
-            desc="FOMO, gần gũi, premium cho thị trường địa phương"
+            title={t("landing.feat2Title")}
+            desc={t("landing.feat2Desc")}
           />
           <Feature
             icon={<Sparkles className="size-5 text-violet-400" />}
-            title="PixVerse"
-            desc="Tích hợp prompt engine + API key tự nhập"
+            title={t("landing.feat3Title")}
+            desc={t("landing.feat3Desc")}
           />
         </div>
 
-        <p className="mt-12 text-xs text-[#e9eaf2]/45">
-          Built with ❤️ in Vietnam · Quoc Cuong Vo · Powered by TRAE SOLO
-        </p>
+        <p className="mt-12 text-xs text-[#e9eaf2]/45">{t("landing.footer")}</p>
       </main>
     </div>
   );

@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useClientReady } from "@/hooks/use-client-store";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   getSettings,
   hasApiKeyPrompted,
@@ -20,6 +21,7 @@ import {
 } from "@/lib/storage";
 
 function ApiKeyPrompt() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(
     () => !hasApiKeyPrompted() && !getSettings().pixverseApiKey
   );
@@ -41,9 +43,9 @@ function ApiKeyPrompt() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="border-white/10 bg-[#12131f] text-[#f5f5f7] sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>PixVerse API Key</DialogTitle>
+          <DialogTitle>{t("dialog.title")}</DialogTitle>
           <DialogDescription className="text-[#e9eaf2]/65">
-            Nhập API key từ{" "}
+            {t("dialog.descPre")}{" "}
             <a
               href="https://app.pixverse.ai"
               target="_blank"
@@ -52,7 +54,7 @@ function ApiKeyPrompt() {
             >
               PixVerse
             </a>{" "}
-            để tạo video thật. Bỏ qua để dùng chế độ demo.
+            {t("dialog.descPost")}
           </DialogDescription>
         </DialogHeader>
         <Input
@@ -64,13 +66,13 @@ function ApiKeyPrompt() {
         />
         <DialogFooter className="gap-2 sm:gap-0">
           <Button variant="ghost" onClick={handleSkip}>
-            Bỏ qua (Demo)
+            {t("dialog.skip")}
           </Button>
           <Button
             onClick={handleSave}
             className="bg-gradient-to-r from-[#ff4d4d] to-[#ff8a3d] text-white hover:opacity-90"
           >
-            Lưu key
+            {t("dialog.save")}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -9,17 +9,26 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
+import type { TranslationKey } from "@/lib/i18n";
+import { LanguageToggle } from "@/components/i18n/language-toggle";
 import { VietHayLogo } from "./viethay-logo";
 
-const nav = [
-  { href: "/generate", label: "Generate", icon: Sparkles, shortcut: "⌘G" },
-  { href: "/history", label: "History", icon: History },
-  { href: "/templates", label: "Templates", icon: LayoutTemplate },
-  { href: "/settings", label: "Settings", icon: Settings },
+const nav: {
+  href: string;
+  labelKey: TranslationKey;
+  icon: typeof Sparkles;
+  shortcut?: string;
+}[] = [
+  { href: "/generate", labelKey: "nav.generate", icon: Sparkles, shortcut: "⌘G" },
+  { href: "/history", labelKey: "nav.history", icon: History },
+  { href: "/templates", labelKey: "nav.templates", icon: LayoutTemplate },
+  { href: "/settings", labelKey: "nav.settings", icon: Settings },
 ];
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-white/8 bg-white/[0.04] px-3 py-4 backdrop-blur-md">
@@ -45,7 +54,7 @@ export function AppSidebar() {
             >
               <span className="flex items-center gap-2">
                 <Icon className="size-4 opacity-80" />
-                {item.label}
+                {t(item.labelKey)}
               </span>
               {item.shortcut && (
                 <span className="text-xs text-[#e9eaf2]/50">{item.shortcut}</span>
@@ -55,14 +64,17 @@ export function AppSidebar() {
         })}
       </nav>
 
-      <div className="mt-4 rounded-xl border border-white/10 bg-black/25 p-3">
-        <div className="flex items-center gap-2.5">
-          <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-white/15 to-white/5 text-xs font-semibold">
-            QC
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-sm font-medium">Quoc Cuong</div>
-            <div className="text-xs text-[#e9eaf2]/55">Hackathon mode</div>
+      <div className="mt-4 space-y-3">
+        <LanguageToggle className="w-full justify-center" />
+        <div className="rounded-xl border border-white/10 bg-black/25 p-3">
+          <div className="flex items-center gap-2.5">
+            <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-white/15 to-white/5 text-xs font-semibold">
+              QC
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="truncate text-sm font-medium">Quoc Cuong</div>
+              <div className="text-xs text-[#e9eaf2]/55">{t("user.mode")}</div>
+            </div>
           </div>
         </div>
       </div>

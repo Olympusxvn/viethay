@@ -6,6 +6,7 @@ import { Trash2, Play, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useExternalStore } from "@/hooks/use-client-store";
+import { useTranslation } from "@/hooks/use-translation";
 import { deleteVideo, listVideos } from "@/lib/video-store";
 
 function subscribeVideos(onChange: () => void) {
@@ -18,6 +19,7 @@ function subscribeVideos(onChange: () => void) {
 }
 
 export default function HistoryPage() {
+  const { t } = useTranslation();
   const videos = useExternalStore(subscribeVideos, listVideos, () => []);
   const refresh = useCallback(() => {
     window.dispatchEvent(new Event("viethay-videos-updated"));
@@ -26,21 +28,19 @@ export default function HistoryPage() {
   return (
     <main className="flex-1 p-4 md:p-6">
       <div className="mb-6">
-        <h1 className="text-lg font-semibold text-[#f5f5f7]">Video History</h1>
-        <p className="text-xs text-[#e9eaf2]/60">
-          Gallery + mock analytics cho mọi video đã tạo
-        </p>
+        <h1 className="text-lg font-semibold text-[#f5f5f7]">{t("history.title")}</h1>
+        <p className="text-xs text-[#e9eaf2]/60">{t("history.subtitle")}</p>
       </div>
 
       {videos.length === 0 ? (
         <Card className="border-white/10 bg-white/[0.04] ring-white/10">
           <CardContent className="flex flex-col items-center gap-4 py-16 text-center">
-            <p className="text-[#e9eaf2]/65">Chưa có video nào.</p>
+            <p className="text-[#e9eaf2]/65">{t("history.empty")}</p>
             <Button
               className="bg-gradient-to-r from-[#ff4d4d] to-[#ff8a3d] text-white"
               render={<Link href="/generate" />}
             >
-              Tạo video đầu tiên
+              {t("history.createFirst")}
             </Button>
           </CardContent>
         </Card>
@@ -55,7 +55,7 @@ export default function HistoryPage() {
                 {v.status === "ready" ? (
                   <Play className="size-10 text-white/40" />
                 ) : (
-                  <span className="text-xs text-[#e9eaf2]/50">Generating…</span>
+                  <span className="text-xs text-[#e9eaf2]/50">{t("history.generating")}</span>
                 )}
               </div>
               <CardContent className="space-y-2 p-4">
@@ -64,11 +64,11 @@ export default function HistoryPage() {
                 </div>
                 <div className="flex items-center gap-2 text-xs text-[#e9eaf2]/55">
                   <BarChart3 className="size-3" />
-                  {v.mockViews?.toLocaleString()} views · {v.mockCtr}% CTR
+                  {v.mockViews?.toLocaleString()} {t("history.views")} · {v.mockCtr}% CTR
                 </div>
                 <div className="flex gap-2 pt-1">
                   <Button size="sm" render={<Link href={`/results/${v.id}`} />}>
-                    Open
+                    {t("history.open")}
                   </Button>
                   <Button
                     size="sm"
