@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useClientReady } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
@@ -63,12 +62,14 @@ function SettingsForm() {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="relative">
-            <Input
+            <input
               type={show ? "text" : "password"}
+              autoComplete="off"
+              spellCheck={false}
               placeholder={t("settings.apiKeyPh")}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className="border-white/10 bg-white/[0.06] pr-10"
+              className="h-9 w-full rounded-lg border border-white/10 bg-white/[0.06] px-3 pr-10 text-sm text-[#f5f5f7] outline-none transition-colors placeholder:text-[#e9eaf2]/40 focus:border-[#ff8a3d]/50"
             />
             <button
               type="button"

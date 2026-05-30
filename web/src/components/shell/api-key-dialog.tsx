@@ -10,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useClientReady } from "@/hooks/use-client-store";
 import { useTranslation } from "@/hooks/use-translation";
 import {
@@ -57,12 +56,14 @@ function ApiKeyPrompt() {
             {t("dialog.descPost")}
           </DialogDescription>
         </DialogHeader>
-        <Input
+        <input
           type="password"
+          autoComplete="off"
+          spellCheck={false}
           placeholder="sk-..."
           value={key}
           onChange={(e) => setKey(e.target.value)}
-          className="border-white/10 bg-white/5"
+          className="h-9 w-full rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-[#f5f5f7] outline-none placeholder:text-[#e9eaf2]/40 focus:border-[#ff8a3d]/50"
         />
         <DialogFooter className="gap-2 sm:gap-0">
           <Button variant="ghost" onClick={handleSkip}>
