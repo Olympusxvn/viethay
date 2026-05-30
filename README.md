@@ -40,7 +40,7 @@ Just describe your product → **VietHay** automatically generates a compelling 
 - **Frontend**: Next.js 15 (App Router) + Tailwind CSS + shadcn/ui
 - **Video Engine**: PixVerse API (`byted-seedance-video-generate`)
 - **Styling**: Modern, warm, premium Vietnamese-inspired design
-- **Deployment**: [Vercel](https://web-seven-fawn-25.vercel.app) — live production
+- **Deployment**: [viethay.vercel.app](https://viethay.vercel.app) — live production
 
 **TRAE SOLO Skills Activated**:
 - `brainstorming`, `executing-plans`, `writing-plans`, `frontend-design`
@@ -62,7 +62,7 @@ Just describe your product → **VietHay** automatically generates a compelling 
 
 Run locally: `cd web && npm install && npm run dev` → open http://localhost:3000
 
-**Live:** https://web-seven-fawn-25.vercel.app
+**Live:** https://viethay.vercel.app
 
 Deploy updates: `cd web && npx vercel deploy --prod`
 
